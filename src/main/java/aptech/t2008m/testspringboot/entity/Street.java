@@ -14,6 +14,7 @@ import java.util.Date;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "streets")
 public class Street {
@@ -25,7 +26,7 @@ public class Street {
     @ManyToOne
     @JoinColumn(name = "districtId", insertable = false, updatable = false)
     @JsonIgnore
-    private District district ;
+    private District districtId ;
 
     @CreationTimestamp
     private Date createdAt;

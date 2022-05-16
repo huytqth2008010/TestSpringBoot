@@ -16,9 +16,8 @@ public class StreetApi {
     StreetService streetService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public Page<Street> getList(@RequestParam(defaultValue = "1") int page,
-                                @RequestParam(defaultValue = "1") int limit) {
-        return streetService.findAll(page, limit);
+    public List<Street> getList() {
+        return streetService.findAll();
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/search")
@@ -47,7 +46,7 @@ public class StreetApi {
     public Street update(@PathVariable int id, @RequestBody Street updateStreet) {
         Street existing = streetService.findById(id).get();
         existing.setNameStreet(updateStreet.getNameStreet());
-        existing.setDistrict(updateStreet.getDistrict());
+        existing.setDistrictId(updateStreet.getDistrictId());
         existing.setDescription(updateStreet.getDescription());
         existing.setStatus(updateStreet.getStatus());
         streetService.save(existing);

@@ -1,5 +1,7 @@
 package aptech.t2008m.testspringboot.entity.enums;
 
+import aptech.t2008m.testspringboot.service.StreetService;
+
 public enum StreetStatus {
     USING(1), UNDER_CONSTRUCTION(0), UNDER_RENOVATION(-1);
 
@@ -7,6 +9,10 @@ public enum StreetStatus {
 
     StreetStatus(int value){
         this.value = value;
+    }
+
+    public static int valueOf(StreetService streetService) {
+        return valueOf(streetService);
     }
 
     public int getValue() {

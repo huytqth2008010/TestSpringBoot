@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,11 +16,15 @@ public class StreetService {
     @Autowired
     private StreetRepository streetRepository;
 
-    public Page<Street> findAll(int page, int limit) {
-        return streetRepository.findAll(
-                PageRequest.of(page - 1, limit));
+    public List<Street> findAll(String name,int districtId){
+        if (districtId==0){
+            return streetRepository.findByInfo(name);
+        }
+        return streetRepository.findByInfo(name,districtId);
     }
-
+    public List<Street> findAll(){
+        return streetRepository.findAll();
+    }
     public List<Street> findByStreetAnDistrict (String name, int districtId) {
         if (districtId==0){
             return streetRepository.findByInfo(name);
@@ -33,8 +38,12 @@ public class StreetService {
     public Street save(Street street) {
         return streetRepository.save(street);
     }
-
+    public List<Street> saveAll(List<Street> districts){
+        return streetRepository.saveAll(districts);
+    }
     public void deleteById(Integer id) {
         streetRepository.deleteById(id);
     }
+
+
 }
