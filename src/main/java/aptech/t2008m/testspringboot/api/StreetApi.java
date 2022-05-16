@@ -22,8 +22,8 @@ public class StreetApi {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/search")
-    public List<Street> search(String name, Integer district) {
-        return streetService.findByStreetAnDistrict(name, district);
+    public List<Street> search(@RequestParam(defaultValue = "")String name,@RequestParam(defaultValue = "")int districtId) {
+        return streetService.findByStreetAnDistrict(name, districtId);
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -46,7 +46,7 @@ public class StreetApi {
     @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
     public Street update(@PathVariable int id, @RequestBody Street updateStreet) {
         Street existing = streetService.findById(id).get();
-        existing.setName(updateStreet.getName());
+        existing.setNameStreet(updateStreet.getNameStreet());
         existing.setDistrict(updateStreet.getDistrict());
         existing.setDescription(updateStreet.getDescription());
         existing.setStatus(updateStreet.getStatus());

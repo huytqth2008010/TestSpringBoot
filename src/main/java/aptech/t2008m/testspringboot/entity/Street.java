@@ -20,7 +20,7 @@ public class Street {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
+    private String nameStreet;
 
     @ManyToOne
     @JoinColumn(name = "districtId", insertable = false, updatable = false)

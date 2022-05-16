@@ -13,12 +13,9 @@ import java.util.List;
 @Repository
 public interface StreetRepository extends JpaRepository<Street, Integer> {
     Page<Street> findAll(Pageable pageable);
+    @Query(value = "select * from streets s where s.name like %:name% and s.district_id=:distinctId",nativeQuery = true)
+    List<Street> findByInfo(@Param("name") String name,@Param("distinctId") int distinctId);
 
-    @Query(value = "SELECT * FROM streets s WHERE s.name like %: name% and s.district = district ",
-            nativeQuery = true)
-    List<Street> search(@Param("name") String name, @Param("district") Integer district);
-
-    List<Street> findAllByNameContainsAndDistrictContains(String name, Integer district);
-
-
+    @Query(value = "select * from streets s where s.name like %:name%",nativeQuery = true)
+    List<Street> findByInfo(@Param("name") String name);
 }

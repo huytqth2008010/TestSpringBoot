@@ -20,8 +20,11 @@ public class StreetService {
                 PageRequest.of(page - 1, limit));
     }
 
-    public List<Street> findByStreetAnDistrict (String name, Integer district) {
-        return streetRepository.findAllByNameContainsAndDistrictContains(name, district);
+    public List<Street> findByStreetAnDistrict (String name, int districtId) {
+        if (districtId==0){
+            return streetRepository.findByInfo(name);
+        }
+        return streetRepository.findByInfo(name,districtId);
     }
     public Optional<Street> findById(Integer id) {
         return streetRepository.findById(id);
